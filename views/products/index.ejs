@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    <h1>ALL PRODUCTS:</h1>
+    <h1>
+        <%=category %> PRODUCTS:
+    </h1>
     <ul>
         <% for(let product of products) { %>
             <li>
@@ -21,6 +23,9 @@
     </ul>
 
     <a href="/products/new">Add a new product</a>
+    <% if (category !=='All' ) { %>
+        <a href="/products">All products</a>
+        <% } %>
 </body>
 
 </html>
