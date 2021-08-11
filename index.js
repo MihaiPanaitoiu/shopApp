@@ -40,6 +40,11 @@ app.get('/products', async (req, res) => {
     res.render('products/index', { products })
 })
 
+app.get('/', async (req, res) => {
+    await res.redirect('/products')
+    console.log('redirected to products page')
+})
+
 app.get('/products/:id', async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -57,6 +62,12 @@ app.put('/products/:id', async (req, res) => {
     const product = await Product.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
     console.log(req.body)
     res.redirect(`/products/${product._id}`);
+})
+
+app.delete('/products/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletedProduct = await Product.findByIdAndDelete(id);
+    res.redirect('/products');
 })
 
 app.listen(3000, () => {
